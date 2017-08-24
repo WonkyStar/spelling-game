@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Libre+Baskerville);@import url(https://fonts.googleapis.com/css?family=Abel);@import url(https://fonts.googleapis.com/css?family=Lato);@font-face {
+@import url(https://fonts.googleapis.com/css?family=Libre+Baskerville);@font-face {
   font-family: "NZK";
   src:url("/assets/fonts/NZK/nightzookeeper-regular-webfont.eot");
   src:url("/assets/fonts/NZK/nightzookeeper-regular-webfont.eot?#iefix") format("embedded-opentype"),
@@ -9,10 +9,7 @@
   font-style: normal;
 }
 @font-face {
-  font-family: 'Abel'; }
-
-@font-face {
-  font-family: 'Lato'; }
+  font-family: 'Libre Baskerville', serif; }
 
 @font-face {
   font-family: "NZK";
@@ -28,3 +25,6 @@
   margin: 0;
   padding: 0;
   font-family: "NZK"; }
+
+body {
+  background-color: #000; }

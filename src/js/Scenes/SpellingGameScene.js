@@ -4,9 +4,9 @@ import Letter from '../Letter'
 
 export default class SpellingGameScene {
 
-  constructor(words, over) {
-    this.words = words;
-    this.over = over;
+  constructor (words, over) {
+    this.words = words
+    this.over = over
 
     this.currentWordIndex = 0
     this.word = this.words[this.currentWordIndex]
@@ -14,7 +14,7 @@ export default class SpellingGameScene {
     this.stage = new PIXI.Container()
   }
 
-  generateScene(word) {
+  generateScene (word) {
     this.cleanScene()
     this.letters = []
     this.tiles = []
@@ -24,37 +24,36 @@ export default class SpellingGameScene {
       ? word.element.split(' ')
       : word.element.split('')
 
-
     this.tiles = elements.map((l, i) => {
       var length = elements.length * TILE_LENGTH
       var margin = this.renderer.width / 2 - Math.min(elements.length, 6) * (TILE_LENGTH + 20) / 2
       var originalY = this.renderer.height / 3
       var y = originalY
       if (i > 5) {
-        y = originalY + 200;
+        y = originalY + 200
       }
       var pos = {
         x: margin + (120 * (i % 6)),
         y: y
       }
-      return new Tile(this, i, margin + ((TILE_LENGTH+20)*(i % 6)), pos.y, TILE_LENGTH, l)
+      return new Tile(this, i, margin + ((TILE_LENGTH + 20) * (i % 6)), pos.y, TILE_LENGTH, l)
     })
 
     this.letters = elements.map((element, i) => {
       return new Letter(this,
         element,
-        Math.random()*(this.renderer.width - 100) + 50,
-        Math.random()*(this.renderer.height / 3) + this.renderer.height / 2,
+        Math.random() * (this.renderer.width - 100) + 50,
+        Math.random() * (this.renderer.height / 3) + this.renderer.height / 2,
         i,
-        this.tiles);
+        this.tiles)
     })
   }
 
-  nextWord() {
+  nextWord () {
     this.spellingHud.clearHint()
 
     if (this.currentWordIndex < this.words.length - 1) {
-      this.currentWordIndex++;
+      this.currentWordIndex++
 
       this.spellingHud.setLevel(this.currentWordIndex)
       this.word = this.words[this.currentWordIndex]
@@ -65,7 +64,7 @@ export default class SpellingGameScene {
     }
   }
 
-  calculateScore() {
+  calculateScore () {
     var correct = 0
     var placed = 0
     this.letters.map((letter) => {
@@ -77,20 +76,22 @@ export default class SpellingGameScene {
       }
     })
 
-
     if (correct === this.letters.length) {
-      var earnedPoint = this.word.usedHint ? 5 : 10;
+      var earnedPoint = this.word.usedHint ? 5 : 10
 
-
-      this.score+=earnedPoint
+      this.score += earnedPoint
       this.spellingHud.setScore(this.score)
       this.nextWord()
     } else if (placed === this.letters.length) {
+
+      this.tiles.map((tile) => {
+        tile.makeRed()
+      })
       this.nextWord()
     }
   }
 
-  renderHud() {
+  renderHud () {
     this.spellingHud = new SpellingGameHud(this.renderer.width, this.renderer.height, this.displayHint.bind(this))
     this.stage.addChild(this.spellingHud.container)
   }

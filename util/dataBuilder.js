@@ -24,18 +24,32 @@ const generateDatabase = function (input, output) {
         .on('end_parsed', function (json) {
 
             json.map((row) => {
-                if (!row['Year 1 & 2 words']) { return }
-                if (!row['Year 1 & 2 Hints']) { return }
-                if (!row['Year 1 & 2 Sentences']) { return }
 
-                var word = {
-                    "word": row['Year 1 & 2 words'],
-                    "hint": row['Year 1 & 2 Hints'],
-                    "sentence": row['Year 1 & 2 Sentences']
+                if (row['Year 1 & 2 words']) {
+                    if (!row['Year 1 & 2 words']) { return }
+                    if (!row['Year 1 & 2 Hints']) { return }
+                    if (!row['Year 1 & 2 Sentences']) { return }
+
+                    var word = {
+                        "word": row['Year 1 & 2 words'],
+                        "hint": row['Year 1 & 2 Hints'],
+                        "sentence": row['Year 1 & 2 Sentences']
+                    }
+                    data["year1/2"].push(word)
                 }
+                 if (row['Year 3 & 4 words']) {
+                    if (!row['Year 3 & 4 words']) { return }
+                    if (!row['Year 3 & 4 Hints']) { return }
+                    if (!row['Year 3 & 4 Sentences']) { return }
 
-                data["year1/2"].push(word)
-            })
+                    var word = {
+                        "word": row['Year 3 & 4 words'],
+                        "hint": row['Year 3 & 4 Hints'],
+                        "sentence": row['Year 3 & 4 Sentences']
+                    }
+                    data["year3/4"].push(word)
+                }
+           })
 
             fs.writeFile(outputJson, JSON.stringify(data), 'utf8', function (err) {
                 if (err) {

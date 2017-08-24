@@ -4,7 +4,9 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
-    "body-parser": "^1.17.2"
+    "body-parser": "^1.17.2",
+    "fontfaceobserver": "^2.0.13",
+    "pixi.js": "^4.5.4"
   },
   "scripts": {
     "start": "webpack --config webpack.config.js",
